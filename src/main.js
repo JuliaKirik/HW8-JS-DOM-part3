@@ -1,28 +1,27 @@
-function addItem() {
+document.querySelector('ul').addEventListener('click', function(event) {
+    let item = event.target.closest('li');
+    if (item){
+        item.classList.toggle('done')
+    }
+    if (event.target.closest('.remove')){
+        item.remove()
+    }
+})
+
+document.querySelector('.addItem').addEventListener('click', function() {
     const input = document.querySelector('#input');
     const list = document.querySelector('.list');
 
     let li = document.createElement('li');
     li.innerText = input.value;
-    li.setAttribute('class', 'in-progress');
+    li.style.background = 'yellow';
 
-    let button = document.createElement('button');
-    button.setAttribute('class', 'remove')
-    button.innerHTML = "Button"
+    let buttonRemove = document.createElement('button');
+    buttonRemove.setAttribute('class', 'remove')
+    buttonRemove.innerHTML = "Remove"
 
-    li.append(button)
+    li.append(buttonRemove);
     list.append(li);
     input.value = '';
 }
-
-document.querySelector('ul').addEventListener('click', function(event) {
-    if (event.target.closest('li')){
-        event.target.closest('li').classList.toggle('done')
-        event.target.closest('li').classList.toggle('in-progress')
-    }
-    if (event.target.closest('.remove')) {
-        event.target.closest('li').remove()
-    }
-})
-
-document.querySelector('.submit-btn').addEventListener('click', addItem);
+);
